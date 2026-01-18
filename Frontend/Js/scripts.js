@@ -44,8 +44,7 @@ function triggerRevealAnimations() {
 
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
 }
-// Smooth Navigation
-
+// Enhanced Mobile Smooth Navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -55,10 +54,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) {
             triggerRevealAnimations();
 
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start' // 'start' is better for section alignment
-            });
+            // Enhanced smooth scrolling for mobile
+            const isMobile = window.innerWidth <= 1024;
+            if (isMobile) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
+            } else {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
 });
@@ -349,10 +358,10 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
 });
 
-// Close mobile menu when a link is clicked
+// Enhanced Mobile Navigation with Smooth Scrolling
 mobileNavLinks.forEach(link => {
     link.addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent default anchor behavior
+        e.preventDefault();
 
         mobileNav.classList.remove('active');
         hamburger.classList.remove('active');
@@ -362,10 +371,15 @@ mobileNavLinks.forEach(link => {
 
         if (target) {
             triggerRevealAnimations();
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            
+            // Enhanced mobile smooth scrolling with delay
+            setTimeout(() => {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
+            }, 300);
         }
     });
 });

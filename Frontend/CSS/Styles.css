@@ -1527,7 +1527,35 @@
         }
 
         /* Responsive */
+        /* Enhanced Mobile Smooth Scrolling */
         @media (max-width: 1024px) {
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                scroll-padding-top: 80px;
+            }
+
+            body {
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+
+            .project-description {
+                max-height: none !important;
+                opacity: 1 !important;
+                overflow: visible !important;
+            }
+
+            .project-card.expanded .project-description {
+                max-height: none !important;
+            }
+
+            .project-buttons-container {
+                max-height: none !important;
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+
             nav {
                 padding: 20px 30px;
             }
